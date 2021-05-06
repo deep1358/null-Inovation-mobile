@@ -9,7 +9,11 @@ const ListingPage = ({ mobiles }) => {
             <div
               key={`${mobile.mobileName}`}
               className="col-6 col-md-4 card"
-              style={{ margin: "20px", width: "22rem" }}
+              style={{
+                margin: "20px",
+                width: "22rem",
+                boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+              }}
             >
               <div className="card-body">
                 <h3 className="card-title">{mobile.mobileName}</h3>

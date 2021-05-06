@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-
 import ListingPage from "../ListingPage/ListingPage";
 
 const Home = () => {
@@ -8,9 +7,12 @@ const Home = () => {
     JSON.parse(localStorage.getItem("mobiles") || "[]")
   );
 
+  const priceRef = useRef(null);
+  const brandRef = useRef(null);
+
   const handleChange = (e) => {
-    var current_price = document.querySelector(".price").value;
-    var current_brand = document.querySelector(".brand").value;
+    var current_price = priceRef.current.value;
+    var current_brand = brandRef.current.value;
 
     if (current_price === "All" && current_brand === "All")
       setMobiles(JSON.parse(localStorage.getItem("mobiles")));
@@ -48,8 +50,9 @@ const Home = () => {
         <div className="col">
           <label className="form-label">Filter by Brand:</label>
           <select
+            ref={brandRef}
             style={{ width: "80%" }}
-            className="form-select brand"
+            className="form-select"
             aria-label="Default select example"
             required
             name="mobileBrand"
@@ -66,8 +69,9 @@ const Home = () => {
         <div className="col">
           <label className="form-label">Filter by Price:</label>
           <select
+            ref={priceRef}
             style={{ width: "80%" }}
-            className="form-select price"
+            className="form-select"
             aria-label="Default select example"
             required
             name="price"
