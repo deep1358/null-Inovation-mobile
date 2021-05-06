@@ -10,20 +10,21 @@ const Home = () => {
   const priceRef = useRef(null);
   const brandRef = useRef(null);
 
+  // Filter Logic Goes Here
   const handleChange = (e) => {
-    var current_price = priceRef.current.value;
-    var current_brand = brandRef.current.value;
+    var currentPrice = priceRef.current.value;
+    var currentBrand = brandRef.current.value;
 
-    if (current_price === "All" && current_brand === "All")
+    if (currentPrice === "All" && currentBrand === "All") {
       setMobiles(JSON.parse(localStorage.getItem("mobiles")));
-    else if (current_price === "All" && current_brand !== "All") {
+    } else if (currentPrice === "All" && currentBrand !== "All") {
       setMobiles(
         JSON.parse(localStorage.getItem("mobiles")).filter(
-          (mobile) => mobile.mobileBrand === current_brand
+          (mobile) => mobile.mobileBrand === currentBrand
         )
       );
-    } else if (current_price !== "All" && current_brand === "All") {
-      var price = current_price.split("-");
+    } else if (currentPrice !== "All" && currentBrand === "All") {
+      var price = currentPrice.split("-");
       setMobiles(
         JSON.parse(localStorage.getItem("mobiles")).filter(
           (mobile) =>
@@ -32,13 +33,13 @@ const Home = () => {
         )
       );
     } else {
-      var price1 = current_price.split("-");
+      var price1 = currentPrice.split("-");
       setMobiles(
         JSON.parse(localStorage.getItem("mobiles")).filter(
           (mobile) =>
             Number(mobile.price) > Number(price1[0]) &&
             Number(mobile.price) <= Number(price1[1]) &&
-            mobile.mobileBrand === current_brand
+            mobile.mobileBrand === currentBrand
         )
       );
     }
@@ -47,6 +48,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="row">
+        {/** Dropdown for Brand for filtering */}
         <div className="col">
           <label className="form-label">Filter by Brand:</label>
           <select
@@ -66,6 +68,8 @@ const Home = () => {
             <option value="Vivo">Vivo</option>
           </select>
         </div>
+
+        {/** Dropdown for Price for filtering */}
         <div className="col">
           <label className="form-label">Filter by Price:</label>
           <select
@@ -85,7 +89,11 @@ const Home = () => {
           </select>
         </div>
       </div>
+
+      {/** Mobiles Detail Page */}
       <ListingPage mobiles={mobiles} />
+
+      {/** Add Mobile Button */}
       <div className="position-absolute" style={{ top: "2vh", right: "2vw" }}>
         <Link to="/admin">
           <button type="button" className="btn btn-dark">

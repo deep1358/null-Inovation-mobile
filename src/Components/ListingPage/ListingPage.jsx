@@ -3,6 +3,7 @@ import React from "react";
 const ListingPage = ({ mobiles }) => {
   return (
     <div className="container">
+      {/** Condition for mobiles exist and then render mobiles */}
       {mobiles && (
         <div className="row justify-content-center">
           {mobiles.map((mobile) => (
@@ -27,6 +28,8 @@ const ListingPage = ({ mobiles }) => {
           ))}
         </div>
       )}
+
+      {/** Condition for no mobiles exist or 0 result of filters */}
       {mobiles.length === 0 && (
         <h1
           style={{

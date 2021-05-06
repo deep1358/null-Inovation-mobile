@@ -13,9 +13,12 @@ const MobileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //Logic of LocalStorage
     var mobiles = JSON.parse(localStorage.getItem("mobiles") || "[]");
     mobiles.push(form);
     localStorage.setItem("mobiles", JSON.stringify(mobiles));
+
     setForm({
       mobileName: "",
       mobileBrand: "",
@@ -24,6 +27,7 @@ const MobileForm = () => {
       RAM: "",
       ROM: "",
     });
+
     alert("Added Successfully");
   };
 
@@ -34,6 +38,8 @@ const MobileForm = () => {
   return (
     <>
       <h1 className="text-center">Add Mobile</h1>
+
+      {/* Form To Add Mobiles */}
       <form
         onSubmit={handleSubmit}
         style={{
@@ -126,9 +132,13 @@ const MobileForm = () => {
           />
           <span className="input-group-text">GB</span>
         </div>
+
+        {/* Submit Button */}
         <button type="submit" className="btn btn-success me-md-2">
           Add
         </button>
+
+        {/* Reset Button */}
         <button
           onClick={() =>
             setForm({
@@ -146,6 +156,8 @@ const MobileForm = () => {
           Reset
         </button>
       </form>
+
+      {/* Show Mobiles Button */}
       <div className="position-absolute" style={{ top: "2vh", right: "2vw" }}>
         <Link to="/">
           <button type="button" className="btn btn-dark">
